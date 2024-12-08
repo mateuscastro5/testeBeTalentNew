@@ -10,8 +10,8 @@
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seu-usuario/senagram.git
-    cd senagram/backend
+    git clone https://github.com/mateuscastro5/testeBeTalentNew.git
+    cd /backend
     ```
 
 2. Copie o arquivo de exemplo `.env`:
