@@ -9,6 +9,7 @@ class ProdutosSchema extends Schema {
       table.increments('id').primary();
       table.string('nome').notNullable();
       table.decimal('preco', 12, 2).notNullable();
+      table.timestamp('deleted_at').nullable();
       table.timestamps();
     });
   }

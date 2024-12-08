@@ -1,8 +1,7 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
-const Hash = use('Hash');
+const Hash = use('Hash')
 
 class User extends Model {
   static get table() {
@@ -17,18 +16,26 @@ class User extends Model {
    * Antes de salvar o usuário, criptografa a senha.
    */
   static boot() {
-    super.boot();
+    super.boot()
 
     this.addHook('beforeSave', async (userInstance) => {
-      if (userInstance.dirty.password) {
-        userInstance.password = await Hash.make(userInstance.password);
+      if (userInstance.dirty.senha) {
+        userInstance.senha = await Hash.make(userInstance.senha)
       }
-    });
+    })
+  }
+
+  static get hidden() {
+    return ['senha']
   }
 
   // Relacionamento com clientes
   clientes() {
     return this.hasMany('App/Models/Cliente');
+  }
+
+  tokens() {
+    return this.hasMany('App/Models/Token')
   }
 }
 

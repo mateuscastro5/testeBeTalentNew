@@ -2,30 +2,26 @@
 
 const Route = use('Route')
 
-// Rota para a raiz do sistema
-Route.get('/', () => {
-  return { message: 'Bem-vindo à API!' }
-})
+// Public routes - no authentication required
+Route.post('login', 'AuthController.login') // Remove leading slash
+Route.post('signup', 'AuthController.signup') // Remove leading slash
 
-// Rota para cadastro de usuário
-Route.post('signup', 'AuthController.signup')
-
-// Rota para login de usuário
-Route.post('login', 'AuthController.login')
-
-// Rotas protegidas por autenticação JWT
+// Rotas protegidas
 Route.group(() => {
+  // Rotas de Clientes
   Route.get('clientes', 'ClienteController.index')
-  Route.post('clientes', 'ClienteController.store')
   Route.get('clientes/:id', 'ClienteController.show')
+  Route.post('clientes', 'ClienteController.store')
   Route.put('clientes/:id', 'ClienteController.update')
   Route.delete('clientes/:id', 'ClienteController.delete')
 
+  // Rotas de Produtos
   Route.get('produtos', 'ProdutoController.index')
-  Route.post('produtos', 'ProdutoController.store')
   Route.get('produtos/:id', 'ProdutoController.show')
+  Route.post('produtos', 'ProdutoController.store')
   Route.put('produtos/:id', 'ProdutoController.update')
   Route.delete('produtos/:id', 'ProdutoController.delete')
 
+  // Rotas de Vendas
   Route.post('vendas', 'VendaController.store')
 }).middleware(['auth'])

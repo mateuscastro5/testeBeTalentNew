@@ -16,7 +16,7 @@ module.exports = {
   | Available Serializers - lucid, database
   |
   */
-  authenticator: 'session',
+  authenticator: 'jwt',
 
   /*
   |--------------------------------------------------------------------------
@@ -70,7 +70,7 @@ module.exports = {
     model: 'App/Models/User',
     scheme: 'jwt',
     uid: 'email',
-    password: 'password',
+    password: 'senha',
     expiresIn: '2h',
     options: {
       secret: Env.get('APP_KEY')

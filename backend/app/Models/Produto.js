@@ -12,7 +12,10 @@ class Produto extends Model {
     return 'id';
   }
 
-  // Relacionamento com vendas (um produto pode ter muitas vendas)
+  static scopeActive(query) {
+    return query.whereNull('deleted_at');
+  }
+
   vendas() {
     return this.hasMany('App/Models/Venda');
   }
