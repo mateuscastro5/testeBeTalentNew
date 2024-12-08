@@ -1,21 +1,116 @@
 'use strict'
 
-/*
-|--------------------------------------------------------------------------
-| Factory
-|--------------------------------------------------------------------------
-|
-| Factories are used to define blueprints for database tables or Lucid
-| models. Later you can use these blueprints to seed your database
-| with dummy data.
-|
-*/
+const casual = require('casual')
+const Factory = use('Factory')
+const Hash = use('Hash')
 
-/** @type {import('@adonisjs/lucid/src/Factory')} */
-// const Factory = use('Factory')
+// Helper function to generate formatted CPF
+function generateCPF() {
+  const numbers = casual.array_of_digits(9).join('')
+  return `${numbers.substr(0,3)}.${numbers.substr(3,3)}.${numbers.substr(6,3)}-${casual.array_of_digits(2).join('')}`
+}
 
-// Factory.blueprint('App/Models/User', (faker) => {
-//   return {
-//     username: faker.username()
-//   }
-// })
+// User Factory
+Factory.blueprint('App/Models/User', async () => {
+  const email = casual.email
+  const senha = casual.password
+  
+  return {
+    email,
+    nome: casual.full_name,
+    senha: await Hash.make(senha)
+  }
+})
+
+// Cliente Factory
+Factory.blueprint('App/Models/Cliente', async (faker, data) => {
+  let user_id
+
+  if (data && data.user_id) {
+    user_id = data.user_id
+  } else {
+    const user = await Factory.model('App/Models/User').create()
+    user_id = user.id
+  }
+
+  return {
+    nome: casual.full_name,
+    cpf: generateCPF(),
+    user_id
+  }
+})
+
+// Produto Factory
+Factory.blueprint('App/Models/Produto', () => {
+  return {
+    nome: casual.word,
+    preco: parseFloat(casual.integer(10, 100).toFixed(2))
+  }
+})
+
+// Venda Factory
+Factory.blueprint('App/Models/Venda', async () => {
+  const Cliente = use('App/Models/Cliente')
+  const Produto = use('App/Models/Produto')
+  
+  // Get all available clients and products
+  const clientes = await Cliente.all()
+  const produtos = await Produto.all()
+  
+  // Get random records
+  const cliente = clientes.rows[Math.floor(Math.random() * clientes.rows.length)]
+  const produto = produtos.rows[Math.floor(Math.random() * produtos.rows.length)]
+  
+  const quantidade = casual.integer(1, 5)
+  const preco_unitario = parseFloat(casual.integer(10, 100).toFixed(2))
+
+  return {
+    cliente_id: cliente ? cliente.id : null,
+    produto_id: produto ? produto.id : null,
+    quantidade,
+    preco_unitario,
+    preco_total: quantidade * preco_unitario,
+    data: casual.date
+  }
+})
+
+// Endereco Factory 
+Factory.blueprint('App/Models/Endereco', async () => {
+  const Cliente = use('App/Models/Cliente')
+  const clientes = await Cliente.all()
+  
+  if (!clientes || clientes.rows.length === 0) {
+    throw new Error('No clients found in the database. Please run ClienteSeeder first.')
+  }
+  
+  // Get a random client
+  const randomClient = clientes.rows[Math.floor(Math.random() * clientes.rows.length)]
+  
+  return {
+    cliente_id: randomClient.id,
+    logradouro: casual.street,
+    numero: casual.integer(1, 999).toString(),
+    bairro: casual.city,
+    cidade: casual.city,
+    estado: casual.state,
+    cep: casual.zip(5)
+  }
+})
+
+// Telefone Factory
+Factory.blueprint('App/Models/Telefone', async () => {
+  const Cliente = use('App/Models/Cliente')
+  const clientes = await Cliente.all()
+  
+  if (!clientes || clientes.rows.length === 0) {
+    throw new Error('No clients found in the database. Please run ClienteSeeder first.')
+  }
+  
+  // Get a random client
+  const randomClient = clientes.rows[Math.floor(Math.random() * clientes.rows.length)]
+  
+  return {
+    cliente_id: randomClient.id,
+    numero: casual.phone
+  }
+})
