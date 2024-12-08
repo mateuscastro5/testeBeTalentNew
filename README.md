@@ -68,13 +68,6 @@
 - As migrações e seeders são executados automaticamente durante o setup.
 - Certifique-se de que o Docker esteja instalado e em execução antes de iniciar o setup.
 
-## Contribuição
-
-1. Faça um fork do projeto.
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`).
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`).
-4. Faça push para a branch (`git push origin feature/nova-feature`).
-5. Crie um novo Pull Request.
 
 ## Licença
 
