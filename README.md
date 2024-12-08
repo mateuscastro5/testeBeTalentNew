@@ -21,7 +21,12 @@
 
 3. Configure as variáveis de ambiente no arquivo `.env` conforme necessário.
 
-4. Execute o setup para configurar o ambiente:
+4. Instale as dependências:
+    ```bash
+    npm install
+    ```
+
+5. Execute o setup para configurar o ambiente:
     ```bash
     npm run setup
     ```
@@ -67,7 +72,6 @@
 - O projeto utiliza AdonisJS como framework principal.
 - As migrações e seeders são executados automaticamente durante o setup.
 - Certifique-se de que o Docker esteja instalado e em execução antes de iniciar o setup.
-
 
 ## Licença
 
