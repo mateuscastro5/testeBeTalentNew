@@ -2,7 +2,7 @@
 
 const Route = use('Route')
 
-// Public routes - no authentication required
+
 Route.post('login', 'AuthController.login') // Remove leading slash
 Route.post('signup', 'AuthController.signup') // Remove leading slash
 

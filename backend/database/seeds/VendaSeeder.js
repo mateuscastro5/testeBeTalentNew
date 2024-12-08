@@ -15,7 +15,6 @@ const Factory = use('Factory');
 
 class VendaSeeder {
   async run() {
-    // Cria 10 vendas fictícias
     await Factory.model('App/Models/Venda').createMany(10);
   }
 }

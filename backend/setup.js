@@ -36,7 +36,6 @@ function ensureDockerComposeFile() {
   const initScriptPath = path.join(__dirname, 'mysql-init.sql')
   const port = checkPortAvailable(3306) ? 3306 : 3307
 
-  // Create initialization script with proper permissions
   const initScript = `
 CREATE DATABASE IF NOT EXISTS betalent;
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'betalent123';
@@ -132,6 +131,9 @@ async function setup() {
   console.log('🚀 Iniciando setup BeTalent API...')
 
   try {
+    console.log('🔧 Instalando Adonis CLI globalmente...')
+    execSync('npm install -g @adonisjs/cli', { stdio: 'inherit' })
+
     checkDockerRequirements()
 
     console.log('🐳 Configurando Docker...')
@@ -170,7 +172,7 @@ async function setup() {
     console.log('🔄 Rodando seeders...')
     execSync('adonis seed --files=DatabaseSeeder.js', { stdio: 'inherit' })
 
-    console.log('\n✨ Setup completo com sucesso!')
+    console.log('✨ Setup completo com sucesso!')
     console.log('\nPara iniciar o servidor, execute:')
     console.log('npm run dev')
 

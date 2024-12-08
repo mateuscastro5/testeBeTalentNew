@@ -51,7 +51,6 @@ class ClienteController {
 
       const data = request.only(['nome', 'cpf'])
       
-      // Se estiver tentando atualizar o CPF, verifica se já existe
       if (data.cpf && data.cpf !== cliente.cpf) {
         const cpfExists = await Cliente.query()
           .where('cpf', data.cpf)

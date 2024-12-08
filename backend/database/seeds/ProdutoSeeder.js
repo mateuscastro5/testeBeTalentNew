@@ -15,7 +15,6 @@ const Factory = use('Factory');
 
 class ProdutoSeeder {
   async run() {
-    // Cria 10 produtos fictícios
     await Factory.model('App/Models/Produto').createMany(10);
   }
 }

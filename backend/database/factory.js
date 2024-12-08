@@ -4,13 +4,11 @@ const casual = require('casual')
 const Factory = use('Factory')
 const Hash = use('Hash')
 
-// Helper function to generate formatted CPF
 function generateCPF() {
   const numbers = casual.array_of_digits(9).join('')
   return `${numbers.substr(0,3)}.${numbers.substr(3,3)}.${numbers.substr(6,3)}-${casual.array_of_digits(2).join('')}`
 }
 
-// User Factory
 Factory.blueprint('App/Models/User', async () => {
   const email = casual.email
   const senha = casual.password
@@ -22,7 +20,6 @@ Factory.blueprint('App/Models/User', async () => {
   }
 })
 
-// Cliente Factory
 Factory.blueprint('App/Models/Cliente', async (faker, data) => {
   let user_id
 
@@ -40,7 +37,6 @@ Factory.blueprint('App/Models/Cliente', async (faker, data) => {
   }
 })
 
-// Produto Factory
 Factory.blueprint('App/Models/Produto', () => {
   return {
     nome: casual.word,
@@ -48,16 +44,13 @@ Factory.blueprint('App/Models/Produto', () => {
   }
 })
 
-// Venda Factory
 Factory.blueprint('App/Models/Venda', async () => {
   const Cliente = use('App/Models/Cliente')
   const Produto = use('App/Models/Produto')
   
-  // Get all available clients and products
   const clientes = await Cliente.all()
   const produtos = await Produto.all()
   
-  // Get random records
   const cliente = clientes.rows[Math.floor(Math.random() * clientes.rows.length)]
   const produto = produtos.rows[Math.floor(Math.random() * produtos.rows.length)]
   
@@ -74,7 +67,6 @@ Factory.blueprint('App/Models/Venda', async () => {
   }
 })
 
-// Endereco Factory 
 Factory.blueprint('App/Models/Endereco', async () => {
   const Cliente = use('App/Models/Cliente')
   const clientes = await Cliente.all()
@@ -83,7 +75,6 @@ Factory.blueprint('App/Models/Endereco', async () => {
     throw new Error('No clients found in the database. Please run ClienteSeeder first.')
   }
   
-  // Get a random client
   const randomClient = clientes.rows[Math.floor(Math.random() * clientes.rows.length)]
   
   return {
@@ -97,7 +88,6 @@ Factory.blueprint('App/Models/Endereco', async () => {
   }
 })
 
-// Telefone Factory
 Factory.blueprint('App/Models/Telefone', async () => {
   const Cliente = use('App/Models/Cliente')
   const clientes = await Cliente.all()
@@ -106,7 +96,6 @@ Factory.blueprint('App/Models/Telefone', async () => {
     throw new Error('No clients found in the database. Please run ClienteSeeder first.')
   }
   
-  // Get a random client
   const randomClient = clientes.rows[Math.floor(Math.random() * clientes.rows.length)]
   
   return {

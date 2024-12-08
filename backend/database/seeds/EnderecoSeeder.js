@@ -6,10 +6,8 @@ const Database = use('Database')
 class EnderecoSeeder {
   async run() {
     try {
-      // Clear existing records
       await Database.table('enderecos').delete()
 
-      // Create one address for each client
       const Cliente = use('App/Models/Cliente')
       const clientes = await Cliente.all()
 
