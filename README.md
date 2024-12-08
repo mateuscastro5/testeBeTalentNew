@@ -122,7 +122,3 @@ para os testes necessários, salva como "EndPointTestMATEUS.postman_collection.j
 - O projeto utiliza AdonisJS como framework principal.
 - As migrações e seeders são executados automaticamente durante o setup.
 - Certifique-se de que o Docker esteja instalado e em execução antes de iniciar o setup.
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](../LICENSE) para mais detalhes.
