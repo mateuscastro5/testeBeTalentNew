@@ -45,14 +45,40 @@
 ### Autenticação
 
 - **POST /login**: Realiza login de um usuário.
+    ```json
+    {
+      "email": "string",
+      "senha": "string"
+    }
+    ```
 - **POST /signup**: Registra um novo usuário.
+    ```json
+    {
+      "email": "string",
+      "nome": "string",
+      "senha": "string"
+    }
+    ```
 
 ### Clientes
 
 - **GET /clientes**: Lista todos os clientes.
 - **GET /clientes/:id**: Exibe detalhes de um cliente específico.
 - **POST /clientes**: Cria um novo cliente.
+    ```json
+    {
+      "nome": "string",
+      "cpf": "string",
+      "user_id": "number"
+    }
+    ```
 - **PUT /clientes/:id**: Atualiza um cliente existente.
+    ```json
+    {
+      "nome": "string",
+      "cpf": "string"
+    }
+    ```
 - **DELETE /clientes/:id**: Remove um cliente.
 
 ### Produtos
@@ -60,12 +86,31 @@
 - **GET /produtos**: Lista todos os produtos.
 - **GET /produtos/:id**: Exibe detalhes de um produto específico.
 - **POST /produtos**: Cria um novo produto.
+    ```json
+    {
+      "nome": "string",
+      "preco": "number"
+    }
+    ```
 - **PUT /produtos/:id**: Atualiza um produto existente.
+    ```json
+    {
+      "nome": "string",
+      "preco": "number"
+    }
+    ```
 - **DELETE /produtos/:id**: Remove um produto.
 
 ### Vendas
 
 - **POST /vendas**: Cria uma nova venda.
+    ```json
+    {
+      "cliente_id": "number",
+      "produto_id": "number",
+      "quantidade": "number"
+    }
+    ```
 
 ## Informações Adicionais
 
