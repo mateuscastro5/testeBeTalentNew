@@ -1,4 +1,4 @@
-# Senagram - Backend
+# Teste Técnico BeTalent - Backend
 
 ## Requisitos
 
