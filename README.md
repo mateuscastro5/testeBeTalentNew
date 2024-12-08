@@ -3,7 +3,7 @@
 ## JSON Coleção do POSTMAN
 
 Caso deseje utilizar POSTMAN para testar os endpoints, encontrará na raiz do projeto a collection já organizada
-para os testes necessários, salva como "EndPointTestMATEUS.postman_collection.json". Apenas lembre-se de trocar o tolken fornecido ao fazer login no Header.
+para os testes necessários, salva como "EndPointTestMATEUS.postman_collection.json". Apenas lembre-se de trocar o token fornecido ao fazer login no Header.
 
 ## Requisitos
 
